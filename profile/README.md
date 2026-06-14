@@ -1,74 +1,72 @@
 # Arsvine Realm Dev Team
 
-Arsvine Realm Dev Team is the development organization behind the ARSVINE web presence: a stylized personal realm for portfolio work, long-form writing, short-form signals, and protected writing flows.
+**Arsvine Realm Dev Team** 是用于维护 **ARSVINE** 相关项目的开发组织。
 
-We build around a simple split:
+这个组织不是传统意义上的商业团队，而是一个围绕个人数字空间建立的工程命名空间。它用于集中管理站点、写作工具、内容管线、访问控制与相关基础设施，使不同职责的项目能够保持清晰边界，并在长期维护中避免混杂。
 
-- `arsvine-realm` serves the public-facing experience.
-- `arsvine-admin` handles authoring and publishing.
-- `arsvine-content` stores canonical private post content.
-- `arsvine-tweets` stores private tweet data for runtime rendering.
+## 组织定位
 
-## Projects
+Arsvine Realm Dev Team 主要承担以下职责：
 
-### `arsvine-realm`
+* 维护 ARSVINE 公开站点与相关前端体验
+* 管理写作、发布与内容同步工具
+* 拆分公开仓库与私有仓库的权限边界
+* 维护内容渲染、缓存刷新与访问保护流程
+* 为后续实验性功能提供独立开发空间
 
-The main public site.
+组织内的仓库并不追求数量堆叠，而是按照职责拆分：公开站点、管理端、内容源、短讯数据与辅助工具各自独立，避免把不同性质的代码和数据混在同一个仓库中。
 
-- Portfolio and project presentation
-- Public blog and posts archive
-- Tweets page rendered from a private content source
-- TOTP-protected writing access flow
-- Locale-aware routing and presentation
+## 设计原则
 
-### `arsvine-admin`
+本组织的项目维护遵循以下原则：
 
-The writing and publishing console.
+* **职责分离**：公开展示、私有写作、内容存储、发布流程与访问控制分别维护。
+* **最小公开面**：公开仓库只暴露必要的站点实现，敏感内容和写入能力放在私有仓库或受控环境中。
+* **内容与代码解耦**：内容更新不应频繁污染主站开发提交，也不应总是触发整站重新部署。
+* **可回滚与可审计**：重要内容和配置尽量保留 Git 历史，便于追踪、回退与维护。
+* **轻量优先**：在没有必要时，不引入过重的 CMS、数据库或复杂后端系统。
+* **长期可维护**：项目结构应服务于持续写作、持续发布和持续演进，而不是一次性部署。
 
-- Admin login and session flow
-- Markdown writing and preview
-- Publish to the private content repository
-- Rebuild indexes
-- Trigger public-site revalidation
+## 仓库边界
 
-### `arsvine-content`
+组织内仓库通常按以下类型划分：
 
-The canonical private content store.
+### Public Site
 
-- `posts/YYYY/slug.md`
-- `posts-index.json`
-- Archived legacy multilingual blog sources
+面向公开访问的站点项目，负责页面渲染、视觉风格、路由、SEO、公开内容展示与用户访问体验。
 
-### `arsvine-tweets`
+### Admin Tools
 
-The private tweets source.
+面向作者本人的管理工具，负责写作、预览、发布、索引重建、缓存刷新与权限校验。
 
-- `tweets/index.json`
-- `tweets/YYYY-MM.json`
-- GitHub-driven update flow for public-site refresh
+### Content Stores
 
-## Current Direction
+私有内容仓库，用于保存正式文章、短讯数据、索引文件或历史内容归档。此类仓库通常不直接面向公众开放。
 
-The organization is moving toward a cleaner separation between:
+### Infrastructure Helpers
 
-- public delivery
-- private authoring
-- canonical content storage
-- protected reading access
+辅助性脚本或配置项目，用于处理部署、同步、内容转换、验证、自动化任务等工程流程。
 
-This keeps sensitive content, write permissions, and public rendering responsibilities clearly separated.
+## 当前仓库
 
-## Writing System
+* `arsvine-realm`：公开站点与主要访问体验。
+* `arsvine-admin`：写作与发布控制台。
+* `arsvine-content`：正式内容的私有存储仓库。
+* `arsvine-tweets`：短讯 / 推文数据的私有内容源。
 
-The current writing system is designed around:
+## 当前方向
 
-- private GitHub-backed storage
-- server-side content reads
-- controlled publishing from admin
-- selective protection for sensitive posts through TOTP
+Arsvine Realm Dev Team 正在向更清晰的多仓库结构演进：
 
-## Notes
+* 主站负责公开呈现；
+* 管理端负责写作与发布；
+* 私有仓库存储正式内容；
+* 内容更新通过索引、缓存与再验证机制同步到公开站点；
+* 受保护内容通过独立访问流程处理。
 
-- Public repositories may expose implementation details of the site itself.
-- Private repositories hold canonical content or authoring infrastructure.
-- The organization profile is intentionally concise; project-specific details live in each repository.
+这种结构的目标不是制造复杂度，而是让每个仓库只承担一种明确责任，使 ARSVINE 能够作为一个长期维护的个人数字空间稳定演进。
+
+## 说明
+
+本组织主要服务于 ARSVINE 相关项目的工程维护与内容发布流程。
+项目细节、运行方式与开发约定以各仓库内文档为准。
